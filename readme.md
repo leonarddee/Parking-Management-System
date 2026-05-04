@@ -13,12 +13,12 @@ College of Informatics and Computing Sciences
  
 ---
  
-## 👥 Team Details
+## 👥 Group Details
  
 | Field | Details |
 |---|---|
-| Team Number | 3 |
-| Team Name | DoLiCol |
+| Group Number | 3 |
+| Group Name | DoLiCol |
  
 | SR-Code | Name | Duties / Responsibilities |
 |---|---|---|
