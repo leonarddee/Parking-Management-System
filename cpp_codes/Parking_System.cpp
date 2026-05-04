@@ -88,27 +88,27 @@ public:
 // ============================================================
 class ParkingSlot {
 private:
-    int    slotNumber;
-    bool   isOccupied;
-    string occupantPlate;
+    int slotNumber;
+    bool isOccupied;
+    Vehicle vehicle;  
 
 public:
     ParkingSlot(int num)
-        : slotNumber(num), isOccupied(false), occupantPlate("") {}
+        : slotNumber(num), isOccupied(false), vehicle() {}
 
     // --- Getters ---
-    int    getSlotNumber()    const { return slotNumber; }
-    bool   getIsOccupied()    const { return isOccupied; }
-    string getOccupantPlate() const { return occupantPlate; }
+    int getSlotNumber() const { return slotNumber; }
+    bool getIsOccupied() const { return isOccupied; }
+    Vehicle getVehicle() const { return vehicle; }
 
-    void occupy(const string& plate) {
-        isOccupied    = true;
-        occupantPlate = plate;
+    void occupy(const Vehicle& v) {
+        isOccupied = true;
+        vehicle = v;   
     }
 
     void vacate() {
-        isOccupied    = false;
-        occupantPlate = "";
+        isOccupied = false;
+        vehicle = Vehicle(); // reset
     }
 };
 
@@ -147,7 +147,7 @@ private:
         string upper = plate;
         transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
         for (auto& slot : slots) {
-            string slotPlate = slot.getOccupantPlate();
+            string slotPlate = slot.getVehicle().getPlate();
             transform(slotPlate.begin(), slotPlate.end(), slotPlate.begin(), ::toupper);
             if (slotPlate == upper) return slot.getSlotNumber();
         }
@@ -156,7 +156,7 @@ private:
 
     // Assign a vehicle to a slot and record it on the undo stack
     void assignSlot(const Vehicle& v, int slotNum) {
-        slots[slotNum - 1].occupy(v.getPlate());
+        slots[slotNum - 1].occupy(v); 
         availableSlots--;
         undoStack.push({ v.getPlate(), slotNum });
 
@@ -300,7 +300,7 @@ public:
         undoStack.pop();
 
         // Only undo if the vehicle is still in that slot
-        if (slots[slotNum - 1].getOccupantPlate() == plate) {
+        if (slots[slotNum - 1].getVehicle().getPlate() == plate) {
             slots[slotNum - 1].vacate();
             availableSlots++;
             cout << "  [UNDO] " << plate
@@ -331,12 +331,18 @@ public:
         // ITERATIVE: simple for-loop over the slots vector
         for (int i = 0; i < (int)slots.size(); i++) {
             if (slots[i].getIsOccupied()) {
-                cout << "  " << left << setw(6) << slots[i].getSlotNumber()
-                     << setw(14) << slots[i].getOccupantPlate() << "\n";
-                anyParked = true;
-            }
-        }
+                Vehicle v = slots[i].getVehicle();
 
+                cout << "  " << left << setw(6) << slots[i].getSlotNumber();
+                cout << left
+                     << setw(14) << v.getPlate()
+                     << setw(22) << v.getOwner()
+                     << setw(14) << v.getType()
+                     << "\n";
+
+        anyParked = true;
+    }
+}
         if (!anyParked)
             cout << "  No vehicles currently parked.\n";
 
@@ -409,7 +415,7 @@ public:
 
         // Linear search through all slots
         for (auto& slot : slots) {
-            string slotPlate = slot.getOccupantPlate();
+            string slotPlate = slot.getVehicle().getPlate();
             transform(slotPlate.begin(), slotPlate.end(), slotPlate.begin(), ::toupper);
             if (slotPlate == upper) {
                 cout << "  Found! " << plate
@@ -439,7 +445,7 @@ public:
         for (auto& slot : slots) {
             cout << "  " << left
                  << setw(8)  << slot.getSlotNumber()
-                 << setw(16) << (slot.getIsOccupied() ? slot.getOccupantPlate() : "---")
+                 << setw(16) << (slot.getIsOccupied() ? slot.getVehicle().getPlate() : "---")
                  << setw(10) << (slot.getIsOccupied() ? "OCCUPIED" : "FREE")
                  << "\n";
         }
