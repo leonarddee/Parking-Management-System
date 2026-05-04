@@ -22,9 +22,9 @@ College of Informatics and Computing Sciences
  
 | SR-Code | Name | Duties / Responsibilities |
 |---|---|---|
-| XX-XXXXX | Dorado, John Leonard S. | Programmer, Tester |
-| XX-XXXXX | Galido, Renz Moen S. | Team Leader, Main Programmer |
-| XX-XXXXX | Palacol, Jana Beatrice T. | Documenter, System Architect |
+| 25-05950 | Dorado, John Leonard S. | Programmer, Tester |
+| 25-05093 | Galido, Renz Moen S. | Team Leader, Main Programmer |
+| 25-09379 | Palacol, Jana Beatrice T. | Documenter, System Architect |
  
 ---
  
@@ -45,6 +45,7 @@ Managing a parking lot involves challenges such as tracking available slots, fai
 - Display the waiting list using a **recursive** approach
 - Search for a vehicle by plate number
 - View all slots sorted by slot number
+
 ### Who will use it
 Parking lot attendants and administrators.
  
