@@ -28,6 +28,12 @@ College of Informatics and Computing Sciences
  
 ---
  
+## 🧩 Brief Description
+ 
+Parking Management System is a C++ console application developed for CC 103 – Data Structures and Algorithms at Batangas State University. The system simulates a real-world parking lot that handles vehicle entry, priority access, waiting queues, and undo operations. It demonstrates the use of a Queue for fair FIFO-based waiting, a Priority Queue for PWD and reserved vehicles, and a Stack for undoing the last parking action. The program also applies OOP principles through three classes — Vehicle, ParkingSlot, and ParkingSystem — and showcases both iterative and recursive approaches to displaying data.
+ 
+---
+
 ## 🧩 Problem Description
  
 Managing a parking lot involves challenges such as tracking available slots, fairly queuing vehicles that are waiting, prioritizing special vehicles (PWD, pregnant women, reserved), and allowing attendants to undo incorrect entries. This system solves these problems using appropriate data structures to simulate a real-world parking lot in a C++ console application.
